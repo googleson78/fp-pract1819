@@ -4,7 +4,7 @@
 
 | Type     | How many? | Points for each | Total |
 | -------- |----------:| ---------------:|------:|
-| Homework | X         | Y               | 70    |
+| Homework | 7         | 10              | 70    |
 | Project  | 1         | 60              | 60    |
 
 > But what about grades?
