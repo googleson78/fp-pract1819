@@ -26,7 +26,14 @@ Notes should be under `notes`.
 
 What we do live should be under `exercises`.
 
+## Mailing list
+
+[Mailing list]
+
+You will receive homeworks and other info here.
+It's also fine to have discussions here if you want.
 
 [Mail]: mailto:godzbanebane@gmail.com
 [Messenger]: https://www.facebook.com/g.lyubenov78
 [Repo]: https://github.com/googleson78/fp-pract1819
+[Mailing list]: https://lists.uni-sofia.bg/cgi-bin/mailman/listinfo/fpract
