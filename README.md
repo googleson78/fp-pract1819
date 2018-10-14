@@ -1,5 +1,17 @@
 # Useful general info
 
+## Homeworks
+
+Homework handover is done through the Moodle system we have at FMI.
+For questions on homeworks you can (ordered by preference):
+
+1. Use the mailing list.
+2. Contact me directly (through one of the methods).
+
+Public methods are best, because others can also read discussions there.
+
+Your points on each homework and total points will be shown in a google doc, which doesn't exist as of yet.
+
 ## Grading?
 
 | Type     | How many? | Points for each | Total |
@@ -9,7 +21,7 @@
 
 > But what about grades?
 
-`undefined` (for now)
+**>=110** points are a **6**
 
 ## Contact me:
 
@@ -31,7 +43,12 @@ What we do live should be under `exercises`.
 [Mailing list]
 
 You will receive homeworks and other info here.
-It's also fine to have discussions here if you want.
+It's also fine to have discussions if you want.
+
+## Pull requests
+
+If you notice any mistakes feel free to open a pull request.
+
 
 [Mail]: mailto:godzbanebane@gmail.com
 [Messenger]: https://www.facebook.com/g.lyubenov78
