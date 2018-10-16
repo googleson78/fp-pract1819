@@ -2,7 +2,7 @@
 
 ## Homeworks
 
-Homework handover is done through the Moodle system we have at FMI.
+Homework handover is done through the [Moodle] system we have at FMI.
 For questions on homeworks you can (ordered by preference):
 
 1. Use the mailing list.
@@ -45,6 +45,10 @@ What we do live should be under `exercises`.
 You will receive homeworks and other info here.
 It's also fine to have discussions if you want.
 
+## Moodle course
+
+[Функционално програмиране (И) 2018/2019] (don't worry it says it's for Informatics)
+
 ## Pull requests
 
 If you notice any mistakes feel free to open a pull request.
@@ -54,3 +58,6 @@ If you notice any mistakes feel free to open a pull request.
 [Messenger]: https://www.facebook.com/g.lyubenov78
 [Repo]: https://github.com/googleson78/fp-pract1819
 [Mailing list]: https://lists.uni-sofia.bg/cgi-bin/mailman/listinfo/fpract
+[Moodle]: https://learn.fmi.uni-sofia.bg/course/view.php?id=4681
+[Функционално програмиране (И) 2018/2019]: https://learn.fmi.uni-sofia.bg/course/view.php?id=4681
+
