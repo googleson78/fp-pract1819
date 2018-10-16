@@ -12,6 +12,8 @@ Public methods are best, because others can also read discussions there.
 
 Your points on each homework and total points will be shown in a google doc, which doesn't exist as of yet.
 
+### [Moodle course for homework hand in]
+
 ## Grading?
 
 | Type     | How many? | Points for each | Total |
@@ -54,3 +56,4 @@ If you notice any mistakes feel free to open a pull request.
 [Messenger]: https://www.facebook.com/g.lyubenov78
 [Repo]: https://github.com/googleson78/fp-pract1819
 [Mailing list]: https://lists.uni-sofia.bg/cgi-bin/mailman/listinfo/fpract
+[Moodle course for homework hand in]: https://learn.fmi.uni-sofia.bg/course/view.php?id=4681
