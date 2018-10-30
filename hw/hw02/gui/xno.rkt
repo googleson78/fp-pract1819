@@ -1,5 +1,7 @@
 #lang racket/gui
 
+;;; Abandon all hope, ye who enter here
+
 (provide main)
 
 (require "utils.rkt")
