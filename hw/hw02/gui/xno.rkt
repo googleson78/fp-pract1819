@@ -5,7 +5,7 @@
 (provide main)
 
 (require "utils.rkt")
-(require "../my-impl.rkt")
+(require "../impl.rkt")
 
 ; Top level frame to contain everything else.
 (define frame (new frame%
