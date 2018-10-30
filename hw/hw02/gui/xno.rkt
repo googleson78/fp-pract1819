@@ -3,7 +3,7 @@
 (provide main)
 
 (require "utils.rkt")
-(require "../impl.rkt")
+(require "../my-impl.rkt")
 
 ; Top level frame to contain everything else.
 (define frame (new frame%
@@ -147,7 +147,7 @@
 
 (define (reset-button but)
   (begin
-    (send but set-label " ")
+    (send but set-label "")
     (send but enable #t)))
 
 ; global.. yay.
@@ -156,6 +156,7 @@
   (set! curr-x-player (not curr-x-player))
   (set! game-ended #f)
   (reset-board-state)
+  (send winner-msg set-label "")
   (reset-board-gui))
 
 (define (main)
