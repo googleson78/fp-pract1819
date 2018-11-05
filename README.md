@@ -12,7 +12,20 @@ Public methods are best, because others can also read discussions there.
 
 Your points on each homework and total points will be shown in a google doc, which doesn't exist as of yet.
 
+
 ### [Moodle course for homework hand in]
+
+### Homework guidelines
+
+#### Именоване на функции
+>    Функциите трябва да се казват както са кръстени в условията.
+
+#### Организация на файлове
+>    При предаване на един файл, файлът да се казва <факултетния ви номер>.{rkt,scm,..} и да **provide**-ва
+>    всичките функции, които са описани в условията.
+>
+>    При предаване на повече от един файл всичките файлове да са в обща папка на име <факултетния ви номер>, която е **tar**/**zip**-ната.
+>    Освен това да има един общ файл – <факултетния ви номер>.{rkt,scm,..}, който **require**-ва всички останали и **provide**-а функциите, които са описани в условията.
 
 ## Grading?
 
