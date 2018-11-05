@@ -17,15 +17,16 @@ Your points on each homework and total points will be shown in a google doc, whi
 
 ### Homework guidelines
 
-#### Именоване на функции
->    Функциите трябва да се казват както са кръстени в условията.
+#### Function names
+>    Functions must be named the same way as in the tasks.
 
-#### Организация на файлове
->    При предаване на един файл, файлът да се казва <факултетния ви номер>.{rkt,scm,..} и да **provide**-ва
->    всичките функции, които са описани в условията.
+#### File organisation
+>    If you are handing in a single file, it must be named <your fn>.{rkt,scm,..} and it must (export) **provide** all the functions
+>    which are specified in the tasks.
 >
->    При предаване на повече от един файл всичките файлове да са в обща папка на име <факултетния ви номер>, която е **tar**/**zip**-ната.
->    Освен това да има един общ файл – <факултетния ви номер>.{rkt,scm,..}, който **require**-ва всички останали и **provide**-а функциите, които са описани в условията.
+>    If you are handing in more than one file, they should be in a folder named <your fn>, which is afterwards **tar**/**zip**-ed.
+>    Furthermore, inside it there should be one "all" file named <your fn>.{rkt,scm,..}, which (imports) **require**s all the other files,
+>    and then (re-exports) **provide**s all the functions which are specified in the tasks.
 
 ## Grading?
 
