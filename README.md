@@ -61,6 +61,8 @@ What we do live should be under `exercises`.
 You will receive homeworks and other info here.
 It's also fine to have discussions if you want.
 
+**You need to confirm your registration! It might be in Spam.**
+
 ## Pull requests
 
 If you notice any mistakes feel free to open a pull request.
