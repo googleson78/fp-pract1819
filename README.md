@@ -15,6 +15,8 @@ Your points on each homework and total points will be shown in a google doc, whi
 
 ### [Moodle course for homework hand in]
 
+### [Google doc for grades and comments on homeworks (hover over your points)]
+
 ### Homework guidelines
 
 #### Function names
@@ -73,3 +75,4 @@ If you notice any mistakes feel free to open a pull request.
 [Repo]: https://github.com/googleson78/fp-pract1819
 [Mailing list]: https://lists.uni-sofia.bg/cgi-bin/mailman/listinfo/fpract
 [Moodle course for homework hand in]: https://learn.fmi.uni-sofia.bg/course/view.php?id=4681
+[Google doc for grades and comments on homeworks (hover over your points)]: https://docs.google.com/spreadsheets/d/1fkqtbtaaxRHx1f26lZM8XrM8bHdh7MHcZoagP5vSYW8
