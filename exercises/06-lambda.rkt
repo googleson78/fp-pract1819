@@ -58,7 +58,7 @@
 ; But this is simply application of the "boolean" to x and y, because of the way we built t and f!
 ;λb.λx.λy.(b x y)
 ; So if we do
-;(λb.λx.λy.(b x y) t => λx.λy.(t x y) => λx.λy.((λx.λy.x) x y) => λx.λy.x
+;(λb.λx.λy.(b x y)) t => λx.λy.(t x y) => λx.λy.((λx.λy.x) x y) => λx.λy.x
 ; And we selected our first "branch", just as we desired.
 (define ifl (lambda (b) (lambda (x) (lambda (y)
                                      ((b x) y)))))
@@ -102,9 +102,9 @@
 ; So if we want to go from n times application to n+1 times application, we simply need to add one more
 ; application of our function (s), after we apply it n times.
 ; First we take a natural number n, and then we construct our new number, with one more s attached to it.
-;λnλs.λz.(s (n s z))
+;λn.λs.λz.(s (n s z))
 ; So for example:
-; (λnλs.λz.(s (n s z))) c0 => λs.λz.(s (c0 s z)) => λs.λz.(s ((λs.λz.z) s z)) => λs.λz.(s z)
+; (λn.λs.λz.(s (n s z))) c0 => λs.λz.(s (c0 s z)) => λs.λz.(s ((λs.λz.z) s z)) => λs.λz.(s z)
 ; which is exactly our constant c1!
 (define cs (lambda (n) (lambda (s) (lambda (z)
                                      (s n)))))
