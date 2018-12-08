@@ -23,12 +23,24 @@ Your points on each homework and total points will be shown in a google doc, whi
 >    Functions must be named the same way as in the tasks.
 
 #### File organisation
->    If you are handing in a single file, it must be named \<your fn\>.{rkt,scm,..} and it must (export) **provide** all the functions
+>    If you are handing in a single file, it must be named \<your fn\>.{rkt,scm,hs,..} and it must **export**/**provide** all the functions
 >    which are specified in the tasks.
 >
 >    If you are handing in more than one file, they should be in a folder named \<your fn\>, which is afterwards **tar**/**zip**-ed.
 >    Furthermore, inside it there should be one "all" file named \<your fn\>.{rkt,scm,..}, which (imports) **require**s all the other files,
 >    and then (re-exports) **provide**s all the functions which are specified in the tasks.
+
+>    Example:
+>
+>    We have two files for our homework `helpers.hs` and `actualhw01.hs` and `actualhw02.hs`.
+>    We now create a folder `81248`. Inside it we place `helpers.hs`,
+>    `actualhw01.hs` and `actualhw02.hs`. Inside it we also create a file `81248.hs`,
+>    in which we import all the important files (`actualhw01.hs` and (`actualhw02.hs`) in this case
+>    and export all the functions that are actually required for the homework. Afterwards we zip the whole folder `81248`
+>    into the zip `81248.zip`. We now hand in this `81248.zip` file for grading.
+
+
+
 
 ## Grading?
 
