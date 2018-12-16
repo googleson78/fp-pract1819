@@ -128,11 +128,11 @@ doingWellInLife (Stud 81248 _ _) = False
 doingWellInLife (Stud fn name lang) = fn < 100000 && name == "Georgi" && functional lang
 
 -- lists are simply ADTs
--- their the empty list [] :: [a]
+-- their constructors are the empty list [] :: [a]
 -- and (:) :: a -> [a] -> [a]
 -- an example of an operator as a constructor
 --
--- for now we can define a more restricted version containing only lists
+-- for now we can define a more restricted version containing only Int lists
 data IntList = Nil
              | Cons Int IntList
     deriving (Show)
