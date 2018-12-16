@@ -71,7 +71,7 @@ foldl f v (x:xs) = foldl f v' xs
 Пример:
 ```haskell
 sumSquaresOfOnlyOdd :: [Integer] -> Integer
-sumSquaresOfOnlyOdd = foldr (+) 0 $ map (\x -> x * x) $ filter odd xs
+sumSquaresOfOnlyOdd xs = foldr (+) 0 $ map (\x -> x * x) $ filter odd xs
 ```
 
 Предпочитайте [point-free] стил когато можете. (освен ако не трябва да правите магарии за да сработи, очевидно)
@@ -79,7 +79,7 @@ sumSquaresOfOnlyOdd = foldr (+) 0 $ map (\x -> x * x) $ filter odd xs
 Пример:
 ```haskell
 sumSquaresOfOnlyOdd :: [Integer] -> Integer
-sumSquaresOfOnlyOdd xs = foldr (+) 0 . map (\x -> x * x) . filter odd
+sumSquaresOfOnlyOdd = foldr (+) 0 . map (\x -> x * x) . filter odd
 ```
 
 Избягвайте lambda-функции когато можете (освен ако не трябва да правите магарии, за да сработи, очевидно).
