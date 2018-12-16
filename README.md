@@ -27,8 +27,8 @@ Your points on each homework and total points will be shown in a google doc, whi
 >    which are specified in the tasks.
 >
 >    If you are handing in more than one file, they should be in a folder named \<your fn\>, which is afterwards **tar**/**zip**-ed.
->    Furthermore, inside it there should be one "all" file named \<your fn\>.{rkt,scm,..}, which (imports) **require**s all the other files,
->    and then (re-exports) **provide**s all the functions which are specified in the tasks.
+>    Furthermore, inside it there should be one "all" file named \<your fn\>.{rkt,scm,hs,..}, which **imports**/**require**s all the other files,
+>    and then re-**exports**/**provide**s all the functions which are specified in the tasks.
 
 >    Example:
 >
