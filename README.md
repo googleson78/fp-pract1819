@@ -10,9 +10,6 @@ For questions on homeworks you can (ordered by preference):
 
 Public methods are best, because others can also read discussions there.
 
-Your points on each homework and total points will be shown in a google doc, which doesn't exist as of yet.
-
-
 ### [Moodle course for homework hand in]
 
 ### [Google doc for grades and comments on homeworks (hover over your points)]
