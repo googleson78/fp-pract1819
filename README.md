@@ -20,21 +20,23 @@ Public methods are best, because others can also read discussions there.
 >    Functions must be named the same way as in the tasks.
 
 #### File organisation
->    If you are handing in a single file, it must be named \<your fn\>.{rkt,scm,hs,..} and it must **export**/**provide** all the functions
+#### Note: This was changed, because of [Haskell module naming requirements].
+
+>    If you are handing in a single file, it must be named Hw\<your fn\>.{rkt,scm,hs,..} and it must **export**/**provide** all the functions
 >    which are specified in the tasks.
 >
->    If you are handing in more than one file, they should be in a folder named \<your fn\>, which is afterwards **tar**/**zip**-ed.
->    Furthermore, inside it there should be one "all" file named \<your fn\>.{rkt,scm,hs,..}, which **imports**/**require**s all the other files,
+>    If you are handing in more than one file, they should be in a folder named Hw\<your fn\>, which is afterwards **tar**/**zip**-ed.
+>    Furthermore, inside it there should be one "all" file named Hw\<your fn\>.{rkt,scm,hs,..}, which **imports**/**require**s all the other files,
 >    and then re-**exports**/**provide**s all the functions which are specified in the tasks.
 
 >    Example:
 >
 >    We have two files for our homework `helpers.hs` and `actualhw01.hs` and `actualhw02.hs`.
 >    We now create a folder `81248`. Inside it we place `helpers.hs`,
->    `actualhw01.hs` and `actualhw02.hs`. Inside it we also create a file `81248.hs`,
+>    `actualhw01.hs` and `actualhw02.hs`. Inside it we also create a file `Hw81248.hs`,
 >    in which we import all the important files (`actualhw01.hs` and (`actualhw02.hs`) in this case
 >    and export all the functions that are actually required for the homework. Afterwards we zip the whole folder `81248`
->    into the zip `81248.zip`. We now hand in this `81248.zip` file for grading.
+>    into the zip `Hw81248.zip`. We now hand in this `Hw81248.zip` file for grading.
 
 
 
@@ -85,3 +87,4 @@ If you notice any mistakes feel free to open a pull request.
 [Mailing list]: https://lists.uni-sofia.bg/cgi-bin/mailman/listinfo/fpract
 [Moodle course for homework hand in]: https://learn.fmi.uni-sofia.bg/course/view.php?id=4681
 [Google doc for grades and comments on homeworks (hover over your points)]: https://docs.google.com/spreadsheets/d/1fkqtbtaaxRHx1f26lZM8XrM8bHdh7MHcZoagP5vSYW8
+[Haskell module naming requirements]:http://learnyouahaskell.com/modules#making-our-own-modules
