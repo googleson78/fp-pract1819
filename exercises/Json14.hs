@@ -1,6 +1,7 @@
 module Json14 where
 
 import Prelude hiding (fail, takeWhile)
+import Data.Foldable (traverse_)
 import Data.Char (ord)
 
 import Parser
@@ -14,7 +15,7 @@ import Parser
 -- parse p str "runs" the parser p on the string str and then
 -- if parsing succeded with return a Just result, otherwise we return Nothing
 --
--- nom :: Parse Char
+-- nom :: Parser Char
 -- nom consumes one character and returns it, only failing if we parse an empty string
 --
 -- Example:
@@ -23,6 +24,18 @@ import Parser
 -- > parse nom "asdf"
 -- Just 'a'
 -- > parse nom ""
+-- Nothing
+--
+-- endOfInput :: Parser ()
+-- only succeeds if we have reached the end of input
+--
+-- > parse endOfInput ""
+-- Just ()
+--
+-- > parse (nom <* endOfInput) "a"
+-- Just 'a'
+--
+-- > parse (nom <* endOfInput) "aa"
 -- Nothing
 --
 -- result :: a -> Parser a
@@ -81,6 +94,8 @@ import Parser
 -- > parse (char 'c' <|> char 'b') "asdf"
 -- Nothing
 --
+--
+--
 -- many :: Parser a -> Parser [a]
 -- many p applies the parser p zero or more times, returning the result as a list
 -- be wary that if p doesn't consume any input this will succeed forever!
@@ -101,7 +116,16 @@ import Parser
 -- > parse (many1 nom) ""
 -- Nothing
 
--- demonstrate this
+-- we parse the c we are given
+-- > parse (char 'a') "a"
+-- Just "a"
+-- > parse (char 'b') "a"
+-- Nothing
+char :: Char -> Parser Char
+char c = do
+    x <- nom
+    if x == c then result x else fail
+
 -- we parse symbols that satisfy the predicate p
 -- > parse (satisfy isSpace) " "
 -- Just ' '
@@ -110,15 +134,9 @@ import Parser
 -- > parse (satisfy isDigit) "1"
 -- Just '1'
 satisfy :: (Char -> Bool) -> Parser Char
-satisfy p = undefined
-
--- we parse the c we are given
--- > parse (char 'a') "a"
--- Just "a"
--- > parse (char 'b') "a"
--- Nothing
-char :: Char -> Parser Char
-char c = undefined
+satisfy p = do
+    x <- nom
+    if p x then result x else fail
 
 -- we parse string we are given
 --
@@ -129,7 +147,11 @@ char c = undefined
 -- > parse (string "as") "asdf"
 -- Just "as"
 string :: String -> Parser String
-string = undefined
+string []  = pure []
+string (s:ss) = do
+    x <- char s
+    xs <- string ss
+    pure $ x:xs
 
 -- we consume n chars from the input, failing if there are less than n
 -- > parse (takeChar 5) "01234"
@@ -139,7 +161,13 @@ string = undefined
 -- > parse (takeChar 5) "012"
 -- Nothing
 takeChar :: Int -> Parser String
-takeChar = undefined
+takeChar 0 = pure ""
+takeChar n = (:) <$> nom <*> takeChar (n - 1)
+
+-- discard the result of a functor, returning the
+-- value "to the right" ("mnemonic": the '>' points to the right)
+($>) :: (Functor f) => f a -> b -> f b
+fa $> b = fmap (const b) fa
 
 -- we execute the parser p, ignoring it's result
 -- note that if p fails, we still fail alltogether
@@ -150,7 +178,7 @@ takeChar = undefined
 -- > parse (void nom) ""
 -- Nothing
 void :: Parser a -> Parser ()
-void p = undefined
+void p = p $> ()
 
 --value
 --    object
@@ -177,27 +205,27 @@ data Value
 -- > parse nullParser "Null"
 -- Nothing
 nullParser :: Parser Value
-nullParser = undefined
+nullParser = string "null" $> Null
 
 -- succeeds only on "false", returning Bool False of type Value
 --
 -- Example:
--- > parse nullParser "false"
+-- > parse falseParser "false"
 -- Just (Bool False)
--- > parse nullParser "False"
+-- > parse falseParser "False"
 -- Nothing
 falseParser :: Parser Value
-falseParser = undefined
+falseParser = string "true" $> Bool True
 
 -- succeeds only on "true", returning Bool True of type Value
 --
 -- Example:
--- > parse nullParser "true"
+-- > parse trueParser "true"
 -- Just (Bool True)
--- > parse nullParser "True"
+-- > parse trueParser "True"
 -- Nothing
 trueParser :: Parser Value
-trueParser = undefined
+trueParser = string "false" $> Bool False
 
 -- we first attempt to parse False and then we attempt to parse True
 --
@@ -209,7 +237,8 @@ trueParser = undefined
 -- > parse boolParser "lol"
 -- Nothing
 boolParser :: Parser Value
-boolParser = undefined
+boolParser =  falseParser
+          <|> trueParser
 
 -- we parse a single digit
 -- you're going to need ord and fromIntegral here
@@ -222,7 +251,7 @@ boolParser = undefined
 -- > parse digitParser "a"
 -- Nothing
 digitParser :: Parser Integer
-digitParser = undefined
+digitParser = fmap (fromIntegral . (subtract (ord '0')) . ord) $ satisfy $ \x -> '0' <= x && x <= '9'
 
 -- we parse many digits, as a number, returning the result as a Value, by wrapping it with Number
 -- many1 is useful here
@@ -235,7 +264,9 @@ digitParser = undefined
 -- > parse numberParser "a1234"
 -- Nothing
 numberParser :: Parser Value
-numberParser = undefined
+numberParser = do
+    ns <- many1 digitParser
+    pure $ Number $ foldl1' (\r x -> r * 10 + x) ns
 
 -- we apply the parser p, but we also consume the char c once before
 -- and after p
@@ -252,7 +283,7 @@ numberParser = undefined
 -- > parse (bracket '"' (string "lol")) "\"lol\""
 -- Just "lol"
 bracket :: Char -> Parser a -> Parser a
-bracket c p = undefined
+bracket c p = char c *> p <* char c
 
 -- we consume characters while the predicate f holds
 -- this consumes at least one character
@@ -263,7 +294,10 @@ bracket c p = undefined
 -- > parse (takeWhile1 (=='a')) ""
 -- Nothing
 takeWhile1 :: (Char -> Bool) -> Parser String
-takeWhile1 f = undefined
+takeWhile1 f = do
+    x <- satisfy f
+    xs <- takeWhile1 f <|> pure []
+    pure $ x:xs
 
 -- we parse strings in json, which are surrounded by double quotes
 --
@@ -275,7 +309,7 @@ takeWhile1 f = undefined
 -- > parse stringParser "\"yoyo"
 -- Nothing
 stringParser :: Parser Value
-stringParser = undefined
+stringParser = String <$> do bracket '"' $ takeWhile1 (/='"')
 
 -- we *attempt* to use the parser we are given
 -- if it succeds we return its result, otherwise we return Nothing
@@ -286,7 +320,7 @@ stringParser = undefined
 -- > parse (optional (char 'c')) "b"
 -- Just Nothing
 optional :: Parser a -> Parser (Maybe a)
-optional p = undefined
+optional p = fmap Just p <|> result Nothing
 
 -- we apply p zero or more times, seperating the parses
 -- with parses of the char c
@@ -299,7 +333,7 @@ optional p = undefined
 -- > parse (string "yo" `sepBy` ',') "yo,a,yo"
 -- Just ["yo"]
 sepBy :: Parser a -> Char -> Parser [a]
-sepBy p c = undefined
+sepBy p c = many $ p <* optional (char c)
 
 -- we parse a json array, which is the same as haskell lists,
 -- surrounded by square brackets and seperated by ','
@@ -313,7 +347,11 @@ sepBy p c = undefined
 -- > parse arrayParser "[1,2,null,false,true,\"string\"]"
 -- Just (Array [Number 1,Number 2,Null,Bool False,Bool True,String "string"])
 arrayParser :: Parser Value
-arrayParser = undefined
+arrayParser = do
+    char '['
+    xs <- valueParser `sepBy` ','
+    char ']'
+    pure $ Array xs
 
 -- we parse a json object element, which is just a mapping from strings to values
 -- it's in the format
@@ -327,7 +365,11 @@ arrayParser = undefined
 -- > parse objectElemParser "\"kek\":\"yoyo\""
 -- Just ("kek",String "yoyo")
 objectElemParser :: Parser (String, Value)
-objectElemParser = undefined
+objectElemParser = do
+    String s <- stringParser
+    char ':'
+    v <- valueParser
+    pure (s, v)
 
 -- we parse a json object, json objects are a lot of object elements, surrounded by curly braces
 -- and seperated by ','
@@ -341,7 +383,11 @@ objectElemParser = undefined
 -- > parse objectParser "{\"lol\":null,\"kek\":\"yoyo\",\"last\":true}"
 -- Just (Object [("lol",Null),("kek",String "yoyo"),("last",Bool True)])
 objectParser :: Parser Value
-objectParser = undefined
+objectParser = do
+    char '{'
+    objs <- objectElemParser `sepBy` ','
+    char '}'
+    pure $ Object $ objs
 
 -- parse a json object in general!
 -- we must attempt all the previous parsers here!
@@ -354,6 +400,10 @@ objectParser = undefined
 -- Just (Bool False)
 -- > parse valueParser "[false,true]"
 -- Just (Array [Bool False,Bool True])
-
 valueParser :: Parser Value
-valueParser = undefined
+valueParser =  nullParser
+           <|> boolParser
+           <|> numberParser
+           <|> stringParser
+           <|> arrayParser
+           <|> objectParser
