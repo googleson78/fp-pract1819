@@ -3,6 +3,7 @@ module Json14 where
 import Prelude hiding (fail, takeWhile)
 import Data.Foldable (traverse_)
 import Data.Char (ord)
+import Data.List (foldl1')
 
 import Parser
 
