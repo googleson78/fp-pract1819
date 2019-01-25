@@ -180,6 +180,8 @@ fa $> b = fmap (const b) fa
 void :: Parser a -> Parser ()
 void p = p $> ()
 
+-- DISCLAIMER: we will not be allowing spaces in our json strings (so filter them out beforehand)
+-- in any way, and also we will not be supporting escape sequences in strings
 --value
 --    object
 --    array
