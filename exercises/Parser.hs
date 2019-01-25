@@ -1,5 +1,4 @@
 {-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE ApplicativeDo #-}
 {-# LANGUAGE LambdaCase #-}
 
 module Parser
@@ -11,6 +10,7 @@ module Parser
     , (<|>)
     , many
     , many1
+    , endOfInput
     ) where
 
 import Prelude hiding (fail, takeWhile)
@@ -59,6 +59,11 @@ nom :: Parser Char
 nom = Parser $ \case
     []   -> []
     x:xs -> [(xs, x)]
+
+endOfInput :: Parser ()
+endOfInput = Parser $ \case
+    [] -> pure $ pure ()
+    _  -> []
 
 parse :: Parser a -> String -> Maybe a
 parse p = fmap snd . listToMaybe . runParser p
