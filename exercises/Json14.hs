@@ -1,6 +1,6 @@
 module Json14 where
 
-import Prelude hiding (fail, takeWhile)
+import Prelude hiding (fail)
 import Data.Foldable (traverse_)
 import Data.Char (ord)
 import Data.List (foldl1')
@@ -51,7 +51,7 @@ import Parser
 -- Just "yoyo"
 --
 -- fail :: Parser a
--- fails doesn't consume any input and immediately fails parsing
+-- fail doesn't consume any input and immediately fails parsing
 --
 -- Example:
 -- > parse fail "whatever I write here doesn't matter"
