@@ -218,7 +218,7 @@ nullParser = string "null" $> Null
 -- > parse falseParser "False"
 -- Nothing
 falseParser :: Parser Value
-falseParser = string "true" $> Bool True
+falseParser = string "false" $> Bool False
 
 -- succeeds only on "true", returning Bool True of type Value
 --
@@ -228,7 +228,7 @@ falseParser = string "true" $> Bool True
 -- > parse trueParser "True"
 -- Nothing
 trueParser :: Parser Value
-trueParser = string "false" $> Bool False
+trueParser = string "true" $> Bool True
 
 -- we first attempt to parse False and then we attempt to parse True
 --
