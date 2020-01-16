@@ -13,6 +13,7 @@ module Parser
     , endOfInput
     ) where
 
+import qualified Control.Monad.Fail as MF
 import Prelude hiding (fail, takeWhile)
 import Data.Maybe (listToMaybe)
 import Control.Applicative (Alternative (empty))
@@ -76,3 +77,6 @@ many = A.many
 
 many1 :: Parser a -> Parser [a]
 many1 = A.some
+
+instance MF.MonadFail Parser where
+  fail _ = Parser $ const []
